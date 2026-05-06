@@ -1,0 +1,219 @@
+/* ====================================================
+   YOGI STUNT SCHOOL – Global Styles
+   ==================================================== */
+
+:root {
+  --clr-black: #0a0a0a;
+  --clr-dark: #111111;
+  --clr-dark2: #1a1a1a;
+  --clr-card: #161616;
+  --clr-gold: #c9a84c;
+  --clr-gold-light: #e2c06e;
+  --clr-gold-dark: #9a7a2e;
+  --clr-red: #c0392b;
+  --clr-red-bright: #e74c3c;
+  --clr-white: #f5f5f5;
+  --clr-grey: #888888;
+  --clr-grey-light: #aaaaaa;
+  --clr-border: rgba(201, 168, 76, 0.2);
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-heading: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius: 8px;
+  --radius-lg: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-gold: 0 0 30px rgba(201,168,76,0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --section-pad: 110px 0;
+  --container-width: 960px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 19px;
+}
+
+body {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--clr-dark); }
+::-webkit-scrollbar-thumb { background: var(--clr-gold); border-radius: 3px; }
+
+/* ── SELECTION ─────────────────────────────────────── */
+::selection { background: var(--clr-gold); color: var(--clr-black); }
+
+/* ── CONTAINER ─────────────────────────────────────── */
+.container {
+  width: 90%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+/* ── SECTION HEADER ────────────────────────────────── */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  border: 1px solid var(--clr-gold);
+  padding: 6px 18px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.section-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 2px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--clr-white);
+}
+
+.section-subheadline {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--clr-grey-light);
+  margin-top: 16px;
+  max-width: 600px;
+}
+
+.gold { color: var(--clr-gold); }
+.red  { color: var(--clr-red-bright); }
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 38px;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--clr-gold) 0%, var(--clr-gold-dark) 100%);
+  color: var(--clr-black);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201,168,76,0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-white);
+  border: 2px solid rgba(255,255,255,0.4);
+}
+.btn-outline:hover {
+  border-color: var(--clr-gold);
+  color: var(--clr-gold);
+  transform: translateY(-2px);
+}
+
+/* ── LOADER ─────────────────────────────────────────── */
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--clr-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  letter-spacing: 10px;
+  color: var(--clr-gold);
+  text-shadow: 0 0 40px rgba(201,168,76,0.6);
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+.loader-bar {
+  width: 220px;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-gold), var(--clr-red-bright));
+  animation: load 1.8s ease forwards;
+}
+
+.loader-text {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 6px;
+  color: var(--clr-grey);
+  text-transform: uppercase;
+}
+
+@keyframes load {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes pulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+/* ── DIVIDER ─────────────────────────────────────────── */
+.gold-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--clr-gold), transparent);
+  margin: 0;
+  border: none;
+}
+
+/* ── UTILITIES ──────────────────────────────────────── */
+.text-center { text-align: center; }
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
+img { display: block; max-width: 100%; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --section-pad: 80px 0; }
+  .section-headline { font-size: 2.8rem; }
+}

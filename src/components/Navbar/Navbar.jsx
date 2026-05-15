@@ -15,6 +15,16 @@ export default function Navbar() {
   }, [])
 
   const scrollTo = (id) => {
+    if (id === 'Privacy Policy') {
+      window.open('/YSS_website/privacy', '_blank')
+      setMenuOpen(false)
+      return
+    }
+    if (id === 'Terms and Condition') {
+      window.open('/YSS_website/termandcondition', '_blank')
+      setMenuOpen(false)
+      return
+    }
     const el = document.getElementById(id.toLowerCase())
     if (el) el.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
@@ -24,8 +34,14 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
         <div className="navbar__brand" onClick={() => scrollTo('home')}>
-          <span className="navbar__brand-initials">{nav.brand}</span>
-          <span className="navbar__brand-full">{nav.brandFull}</span>
+          {nav.logo ? (
+            <img src={nav.logo} alt={nav.brandFull} className="navbar__logo" />
+          ) : (
+            <>
+              <span className="navbar__brand-initials">{nav.brand}</span>
+              <span className="navbar__brand-full">{nav.brandFull}</span>
+            </>
+          )}
         </div>
 
         <nav className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>

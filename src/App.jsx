@@ -17,23 +17,23 @@ function App() {
   const [legalModalType, setLegalModalType] = useState(null)
   const [path, setPath] = useState(window.location.pathname)
 
-  const isPrivacyPage = path === '/privacy-policy'
-  const isTermsPage = path === '/terms-of-service'
+  const isPrivacyPage = path === '/YSS_website/privacy'
+  const isTermsPage = path === '/YSS_website/termandcondition'
   const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : null
 
   const openLegalModal = (type) => setLegalModalType(type)
   const closeLegalModal = () => setLegalModalType(null)
 
   const openLegalPage = (type) => {
-    const nextPath = type === 'privacy' ? '/privacy-policy' : '/terms-of-service'
+    const nextPath = type === 'privacy' ? '/YSS_website/privacy' : '/YSS_website/termandcondition'
     window.history.pushState({}, '', nextPath)
     setLegalModalType(null)
     setPath(nextPath)
   }
 
   const closeLegalPage = () => {
-    window.history.pushState({}, '', '/')
-    setPath('/')
+    window.history.pushState({}, '', '/YSS_website/')
+    setPath('/YSS_website/')
   }
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function App() {
         <Testimonials />
         <Contact />
       </main>
-      <Footer onOpenLegalModal={openLegalModal} />
+      <Footer />
       <ScrollToTop />
       <LegalModal type={legalModalType} onClose={closeLegalModal} onOpenPage={openLegalPage} />
     </div>

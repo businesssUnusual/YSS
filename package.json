@@ -1,5 +1,4 @@
 {
-  "homepage": "https://businesssUnusual.github.io/YSS",
   "name": "yss-website",
   "private": true,
   "version": "1.0.0",
@@ -9,9 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "generate-placeholders": "node scripts/generate-placeholders.cjs",
-    "extract-pdf": "node scripts/extract-pdf.cjs",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+    "extract-pdf": "node scripts/extract-pdf.cjs"
   },
   "dependencies": {
     "framer-motion": "^11.0.0",
@@ -26,7 +23,6 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
-    "gh-pages": "^6.3.0",
     "vite": "^5.0.8"
   }
 }

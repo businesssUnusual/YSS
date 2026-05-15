@@ -1,4 +1,8 @@
 import React from 'react'
+import Navbar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
+import ScrollToTop from '../ScrollToTop/ScrollToTop'
+import { siteContent } from '../../content/siteContent'
 import './Legal.css'
 
 const LEGAL_CONTENT = {
@@ -115,6 +119,15 @@ function LegalContent({ type }) {
             </ul>
           </section>
         ))}
+
+        <section className="legal__section legal__section--business">
+          <h3>Business Information</h3>
+          <ul>
+            {siteContent.footer.businessDetails.map(item => (
+              <li key={item.label}><strong>{item.label}</strong> {item.value}</li>
+            ))}
+          </ul>
+        </section>
       </div>
     </>
   )
@@ -139,13 +152,15 @@ export function LegalModal({ type, onClose, onOpenPage }) {
 
 export function LegalPage({ type, onBack }) {
   return (
-    <main className="legal-page">
-      <div className="container legal-page__inner">
-        <LegalContent type={type} />
-        <div className="legal-page__actions">
-          <button className="btn btn-primary" onClick={onBack}>Close</button>
+    <>
+      <Navbar />
+      <main className="legal-page">
+        <div className="container legal-page__inner">
+          <LegalContent type={type} />
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+      <ScrollToTop />
+    </>
   )
 }

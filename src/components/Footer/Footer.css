@@ -19,6 +19,14 @@
   margin-bottom: 12px;
 }
 
+.footer__logo-img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 12px;
+  display: block;
+}
+
 .footer__tagline {
   font-family: var(--font-heading);
   font-size: 0.8rem;
@@ -111,6 +119,25 @@
   font-size: 0.85rem;
   color: var(--clr-grey);
   line-height: 1.5;
+}
+
+.footer__business {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__business-item {
+  font-size: 0.82rem;
+  color: var(--clr-grey);
+  line-height: 1.5;
+}
+
+.footer__business-label {
+  color: var(--clr-gold);
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
 }
 
 /* ── BOTTOM ────────────────────────────────────────────── */

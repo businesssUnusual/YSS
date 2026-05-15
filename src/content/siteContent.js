@@ -9,6 +9,7 @@ export const siteContent = {
   nav: {
     brand: "YSS",
     brandFull: "Yogi Stunt School",
+    logo: "/YSS_website/images/yss-logo.png",
     links: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact"],
   },
 
@@ -36,6 +37,7 @@ export const siteContent = {
     paragraphs: [
       "Led by Sudhanshu (15+ years of experience), Yogi Stunt School is East India's first track-based stunt school built for safe, scientific stunt learning.",
       "We train on a private controlled track with timer-based sessions, daily warm-up drills, machine support, and constant supervision to ensure visible progress.",
+      "Official Partners of Patna Traffic Police for road safety awareness.",
       "Our mission is clear: promote responsible riding, ban public-road stunts, and build real stunt skills through discipline and safety-first training.",
     ],
     highlights: [
@@ -96,9 +98,9 @@ export const siteContent = {
     headline: "Watch Us in Action",
     subheadline: "Real stunts. Real performers. No shortcuts.",
     videos: [
-      { youtubeId: '3Hcjd8KR41M', title: 'YSS' },
-      { youtubeId: '7tRckGyZBb8', title: 'YSS' },
-      { youtubeId: 'mnqO2f7Y-AQ', title: 'YSS' },
+      { youtubeId: '3Hcjd8KR41M', title: '1-Month Master: Basics to Control' },
+      { youtubeId: '3Hcjd8KR41M', title: '2-Month Pro Rider: Flow & Drifting' },
+      { youtubeId: '3Hcjd8KR41M', title: '3-Month Elite: Circle Wheelie to Full Flow' },
     ],
   },
 
@@ -140,8 +142,9 @@ export const siteContent = {
     headline: "Start Your Journey",
     subheadline: "Registration starts at ₹1,000. Choose your slot and begin safe stunt training in Patna.",
     info: [
-      { icon: "📍", label: "Location", value: "Patna, Bihar (Private Track Facility)" },
+      { icon: "📍", label: "Location", value: "JALALPUR FUUN, opp. Gangaajal City, near Loknayak Jayaprakash Narayan Bridge, Sonepur, Sahapur Diara, Bihar 841101", url: "https://maps.app.goo.gl/R7KrFHJbtXndraK96" },
       { icon: "📞", label: "Phone", value: "+91 93344 77891" },
+      { icon: "✉️", label: "Email", value: "info@yogistuntschool.com" },
       { icon: "🕐", label: "Schedule", value: "1 hr/day, 5 days/week + 1 rest day + 1 maintenance day" },
     ],
     formLabels: {
@@ -150,6 +153,7 @@ export const siteContent = {
       phone: "Phone Number",
       program: "Interested Program",
       message: "Your Message",
+      consent: "I agree to receive communication from Yogi Stunt School on above provided details.",
       submit: "Send Enquiry",
     },
   },
@@ -158,11 +162,16 @@ export const siteContent = {
   footer: {
     tagline: "Train Hard. Perform Bold. Stay Safe.",
     copyright: `© ${new Date().getFullYear()} Yogi Stunt School. All rights reserved.`,
-    links: ["Privacy Policy", "Terms of Service", "Sitemap"],
+    quickLinks: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact", "Privacy Policy", "Terms and Condition"],
+    links: ["Privacy Policy", "Terms and Condition"],
+    businessDetails: [
+      { label: "GST No.", value: "10AALCT0135D1Z1" },
+      { label: "CIN No.", value: "U85211BR2024PTC069503" },
+    ],
     social: [
-      { name: "Instagram", url: "https://instagram.com/yogistuntschool" },
+      { name: "Instagram", url: "https://www.instagram.com/yogi_stunt_school?utm_source=qr&igsh=MW9hOWhqa3Z3MnZ5cw==" },
       { name: "YouTube", url: "https://youtube.com/@yogistuntschool" },
-      { name: "Facebook", url: "https://facebook.com" },
+      { name: "Facebook", url: "https://www.facebook.com/YOGISTUNTSCHOOL/" },
     ],
   },
 }

@@ -8,10 +8,16 @@ const { formLabels } = contact
 const contactPhone = contact.info.find(item => item.label === 'Phone')?.value || ''
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', program: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', program: '', message: '', consent: false })
   const [submitted, setSubmitted] = useState(false)
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleChange = e => {
+    const { name, value, type, checked } = e.target
+    setForm({
+      ...form,
+      [name]: type === 'checkbox' ? checked : value,
+    })
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -20,7 +26,7 @@ export default function Contact() {
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 5000)
-    setForm({ name: '', email: '', phone: '', program: '', message: '' })
+    setForm({ name: '', email: '', phone: '', program: '', message: '', consent: false })
   }
 
   return (
@@ -36,13 +42,29 @@ export default function Contact() {
 
           <div className="contact__details">
             {contact.info.map((item, i) => (
-              <div className="contact__detail" key={i}>
-                <span className="contact__detail-icon">{item.icon}</span>
-                <div>
-                  <p className="contact__detail-label">{item.label}</p>
-                  <p className="contact__detail-value">{item.value}</p>
+              item.url ? (
+                <a
+                  className="contact__detail contact__detail--link"
+                  key={i}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="contact__detail-icon">{item.icon}</span>
+                  <div>
+                    <p className="contact__detail-label">{item.label}</p>
+                    <p className="contact__detail-value contact__detail-link">{item.value}</p>
+                  </div>
+                </a>
+              ) : (
+                <div className="contact__detail" key={i}>
+                  <span className="contact__detail-icon">{item.icon}</span>
+                  <div>
+                    <p className="contact__detail-label">{item.label}</p>
+                    <p className="contact__detail-value">{item.value}</p>
+                  </div>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </div>
@@ -89,6 +111,18 @@ export default function Contact() {
                 <label htmlFor="message">{formLabels.message}</label>
                 <textarea id="message" name="message" value={form.message} onChange={handleChange} rows={5} placeholder="Tell us about your experience and goals..." />
               </div>
+
+              <label className="contact__checkbox" htmlFor="consent">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={form.consent}
+                  onChange={handleChange}
+                  required
+                />
+                <span>{formLabels.consent}</span>
+              </label>
 
               <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '16px' }}>
                 {formLabels.submit} →

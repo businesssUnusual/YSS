@@ -4,13 +4,17 @@ import './Footer.css'
 
 const { footer, nav } = siteContent
 
-export default function Footer({ onOpenLegalModal }) {
+export default function Footer() {
   return (
     <footer className="footer">
       <hr className="gold-divider" />
       <div className="container footer__inner">
         <div className="footer__brand">
-          <span className="footer__logo">{nav.brand}</span>
+          {nav.logo ? (
+            <img src={nav.logo} alt={nav.brandFull} className="footer__logo-img" />
+          ) : (
+            <span className="footer__logo">{nav.brand}</span>
+          )}
           <p className="footer__tagline">{footer.tagline}</p>
           <div className="footer__social">
             {footer.social.map(s => (
@@ -24,9 +28,17 @@ export default function Footer({ onOpenLegalModal }) {
         <div className="footer__nav">
           <h4 className="footer__nav-title">Quick Links</h4>
           <ul>
-            {nav.links.map(link => (
+            {footer.quickLinks.map(link => (
               <li key={link}>
                 <button className="footer__nav-link" onClick={() => {
+                  if (link === 'Privacy Policy') {
+                    window.open('/YSS_website/privacy', '_blank')
+                    return
+                  }
+                  if (link === 'Terms and Condition') {
+                    window.open('/YSS_website/termandcondition', '_blank')
+                    return
+                  }
                   const el = document.getElementById(link.toLowerCase())
                   if (el) el.scrollIntoView({ behavior: 'smooth' })
                 }}>
@@ -55,6 +67,14 @@ export default function Footer({ onOpenLegalModal }) {
               <span>{item.icon}</span> {item.value}
             </p>
           ))}
+          <div className="footer__business">
+            <h4 className="footer__nav-title">Business Details</h4>
+            {footer.businessDetails.map(item => (
+              <p key={item.label} className="footer__business-item">
+                <span className="footer__business-label">{item.label}</span> {item.value}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -64,10 +84,10 @@ export default function Footer({ onOpenLegalModal }) {
           <div className="footer__legal">
             {footer.links.map(l => {
               if (l === 'Privacy Policy') {
-                return <button key={l} className="footer__legal-link" onClick={() => onOpenLegalModal('privacy')}>{l}</button>
+                return <button key={l} className="footer__legal-link" onClick={() => window.open('/YSS_website/privacy', '_blank')}>{l}</button>
               }
-              if (l === 'Terms of Service') {
-                return <button key={l} className="footer__legal-link" onClick={() => onOpenLegalModal('terms')}>{l}</button>
+              if (l === 'Terms and Condition') {
+                return <button key={l} className="footer__legal-link" onClick={() => window.open('/YSS_website/termandcondition', '_blank')}>{l}</button>
               }
               return <a key={l} href="#" className="footer__legal-link">{l}</a>
             })}

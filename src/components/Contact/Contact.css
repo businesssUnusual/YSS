@@ -31,6 +31,23 @@
   gap: 16px;
 }
 
+.contact__detail--link {
+  text-decoration: none;
+  padding: 8px 10px;
+  margin: -8px -10px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.contact__detail--link:hover {
+  background: rgba(201,168,76,0.08);
+}
+
+.contact__detail--link:hover .contact__detail-link,
+.contact__detail--link:hover .contact__detail-label {
+  color: var(--clr-gold);
+}
+
 .contact__detail-icon {
   font-size: 1.3rem;
   line-height: 1;
@@ -51,6 +68,15 @@
   font-size: 0.95rem;
   color: var(--clr-grey-light);
   line-height: 1.5;
+}
+
+.contact__detail-link {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact__detail-link:hover {
+  color: var(--clr-gold);
 }
 
 .contact__map-placeholder {
@@ -136,6 +162,28 @@
 .form-group select option {
   background: var(--clr-dark2);
   color: var(--clr-white);
+}
+
+.contact__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--clr-grey-light);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.contact__checkbox input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--clr-gold);
+  flex-shrink: 0;
+}
+
+.contact__checkbox span {
+  display: block;
 }
 
 /* ── SUCCESS ──────────────────────────────────────────── */

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/YSS_website/',
+  base: '/YSS/',
   plugins: [react()],
   server: {
     port: 8001,

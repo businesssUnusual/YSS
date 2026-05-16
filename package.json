@@ -6,7 +6,7 @@
   "homepage": "https://businesssUnusual.github.io/YSS",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite --port 8001",
     "build": "vite build",
     "preview": "vite preview",

@@ -15,25 +15,36 @@ import { LegalModal, LegalPage } from './components/Legal/Legal'
 function App() {
   const [loading, setLoading] = useState(true)
   const [legalModalType, setLegalModalType] = useState(null)
-  const [path, setPath] = useState(window.location.pathname)
+  const getInitialPath = () => {
+  const params = new URLSearchParams(window.location.search)
+  const redirect = params.get('redirect')
 
-  const isPrivacyPage = path === '/YSS_website/privacy'
-  const isTermsPage = path === '/YSS_website/termandcondition'
+  if (redirect) {
+    return '/YSS' + redirect
+  }
+
+  return window.location.pathname
+}
+
+const [path, setPath] = useState(getInitialPath())
+
+  const isPrivacyPage = path === '/YSS/privacy'
+  const isTermsPage = path === '/YSS/termandcondition'
   const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : null
 
   const openLegalModal = (type) => setLegalModalType(type)
   const closeLegalModal = () => setLegalModalType(null)
 
   const openLegalPage = (type) => {
-    const nextPath = type === 'privacy' ? '/YSS_website/privacy' : '/YSS_website/termandcondition'
+    const nextPath = type === 'privacy' ? '/YSS/privacy' : '/YSS/termandcondition'
     window.history.pushState({}, '', nextPath)
     setLegalModalType(null)
     setPath(nextPath)
   }
 
   const closeLegalPage = () => {
-    window.history.pushState({}, '', '/YSS_website/')
-    setPath('/YSS_website/')
+    window.history.pushState({}, '', '/YSS/')
+    setPath('/YSS/')
   }
 
   useEffect(() => {

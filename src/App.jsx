@@ -20,7 +20,7 @@ function App() {
   const redirect = params.get('redirect')
 
   if (redirect) {
-    return '/YSS' + redirect
+    return redirect
   }
 
   return window.location.pathname
@@ -28,23 +28,23 @@ function App() {
 
 const [path, setPath] = useState(getInitialPath())
 
-  const isPrivacyPage = path === '/YSS/privacy'
-  const isTermsPage = path === '/YSS/termandcondition'
+  const isPrivacyPage = path === '/privacy'
+  const isTermsPage = path === '/termandcondition'
   const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : null
 
   const openLegalModal = (type) => setLegalModalType(type)
   const closeLegalModal = () => setLegalModalType(null)
 
   const openLegalPage = (type) => {
-    const nextPath = type === 'privacy' ? '/YSS/privacy' : '/YSS/termandcondition'
+    const nextPath = type === 'privacy' ? '/privacy' : '/termandcondition'
     window.history.pushState({}, '', nextPath)
     setLegalModalType(null)
     setPath(nextPath)
   }
 
   const closeLegalPage = () => {
-    window.history.pushState({}, '', '/YSS/')
-    setPath('/YSS/')
+    window.history.pushState({}, '', '/')
+    setPath('/')
   }
 
   useEffect(() => {

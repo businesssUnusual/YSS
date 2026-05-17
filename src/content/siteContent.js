@@ -9,7 +9,7 @@ export const siteContent = {
   nav: {
     brand: "YSS",
     brandFull: "Yogi Stunt School",
-    logo: "/YSS/images/yss-logo.png",
+    logo: "/images/yss-logo.png",
     links: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact"],
   },
 

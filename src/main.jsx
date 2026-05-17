@@ -7,7 +7,7 @@ const params = new URLSearchParams(window.location.search);
 const redirect = params.get('redirect');
 
 if (redirect) {
-  window.history.replaceState({}, '', '/YSS' + redirect);
+  window.history.replaceState({}, '', redirect);
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

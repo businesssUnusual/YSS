@@ -32,11 +32,11 @@ export default function Footer() {
               <li key={link}>
                 <button className="footer__nav-link" onClick={() => {
                   if (link === 'Privacy Policy') {
-                    window.open('/YSS/privacy', '_blank')
+                    window.open('/privacy', '_blank')
                     return
                   }
                   if (link === 'Terms and Condition') {
-                    window.open('/YSS/termandcondition', '_blank')
+                    window.open('/termandcondition', '_blank')
                     return
                   }
                   const el = document.getElementById(link.toLowerCase())
@@ -84,10 +84,10 @@ export default function Footer() {
           <div className="footer__legal">
             {footer.links.map(l => {
               if (l === 'Privacy Policy') {
-                return <button key={l} className="footer__legal-link" onClick={() => window.open('/YSS/privacy', '_blank')}>{l}</button>
+                return <button key={l} className="footer__legal-link" onClick={() => window.open('/privacy', '_blank')}>{l}</button>
               }
               if (l === 'Terms and Condition') {
-                return <button key={l} className="footer__legal-link" onClick={() => window.open('/YSS/termandcondition', '_blank')}>{l}</button>
+                return <button key={l} className="footer__legal-link" onClick={() => window.open('/termandcondition', '_blank')}>{l}</button>
               }
               return <a key={l} href="#" className="footer__legal-link">{l}</a>
             })}

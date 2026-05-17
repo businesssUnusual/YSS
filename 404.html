@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <script>
-    const path = window.location.pathname.replace('/YSS', '');
-    window.location.replace('/YSS/?redirect=' + encodeURIComponent(path));
+    const path = window.location.pathname;
+    window.location.replace('/?redirect=' + encodeURIComponent(path));
   </script>
 </head>
 <body></body>

@@ -16,12 +16,12 @@ export default function Navbar() {
 
   const scrollTo = (id) => {
     if (id === 'Privacy Policy') {
-      window.open('/YSS/privacy', '_blank')
+      window.open('/privacy', '_blank')
       setMenuOpen(false)
       return
     }
     if (id === 'Terms and Condition') {
-      window.open('/YSS/termandcondition', '_blank')
+      window.open('/termandcondition', '_blank')
       setMenuOpen(false)
       return
     }

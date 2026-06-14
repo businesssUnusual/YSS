@@ -39,6 +39,10 @@ export default function Footer() {
                     window.open('/termandcondition', '_blank')
                     return
                   }
+                  if (link === 'FAQ') {
+                    window.open('/faq', '_blank')
+                    return
+                  }
                   const el = document.getElementById(link.toLowerCase())
                   if (el) el.scrollIntoView({ behavior: 'smooth' })
                 }}>
@@ -58,6 +62,14 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          <div className="footer__business">
+            <h4 className="footer__nav-title">Business Details</h4>
+            {footer.businessDetails.map(item => (
+              <p key={item.label} className="footer__business-item">
+                <span className="footer__business-label">{item.label}</span> {item.value}
+              </p>
+            ))}
+          </div>
         </div>
 
         <div className="footer__contact">
@@ -67,14 +79,6 @@ export default function Footer() {
               <span>{item.icon}</span> {item.value}
             </p>
           ))}
-          <div className="footer__business">
-            <h4 className="footer__nav-title">Business Details</h4>
-            {footer.businessDetails.map(item => (
-              <p key={item.label} className="footer__business-item">
-                <span className="footer__business-label">{item.label}</span> {item.value}
-              </p>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -88,6 +92,9 @@ export default function Footer() {
               }
               if (l === 'Terms and Condition') {
                 return <button key={l} className="footer__legal-link" onClick={() => window.open('/termandcondition', '_blank')}>{l}</button>
+              }
+              if (l === 'FAQ') {
+                return <button key={l} className="footer__legal-link" onClick={() => window.open('/faq', '_blank')}>{l}</button>
               }
               return <a key={l} href="#" className="footer__legal-link">{l}</a>
             })}

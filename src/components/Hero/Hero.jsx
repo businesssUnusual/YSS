@@ -26,7 +26,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster={assetPath('images/hero-poster.png')}
+          poster={assetPath('images/image_5.jpg')}
         />
         <div className="hero__overlay" />
         <div className="hero__gradient-bottom" />

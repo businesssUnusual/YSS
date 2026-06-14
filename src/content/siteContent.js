@@ -9,8 +9,8 @@ export const siteContent = {
   nav: {
     brand: "YSS",
     brandFull: "Yogi Stunt School",
-    logo: "/images/yss-logo.png",
-    links: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact"],
+    logo: "/images/image_6.png",
+    links: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact", "FAQ"],
   },
 
   // ── HERO ─────────────────────────────────────────────────
@@ -25,8 +25,8 @@ export const siteContent = {
 
   // ── STATS BAR ─────────────────────────────────────────────
   stats: [
+     { value: "15+", label: "Years Experience" },
     { value: "100+", label: "Students Trained" },
-    { value: "15+", label: "Years Experience" },
     { value: "5", label: "Training Days/Week" },
   ],
 
@@ -139,11 +139,10 @@ export const siteContent = {
   // ── CONTACT ──────────────────────────────────────────────
   contact: {
     sectionTag: "Get In Touch",
-    headline: "Start Your Journey",
-    subheadline: "Registration starts at ₹1,000. Choose your slot and begin safe stunt training in Patna.",
     info: [
-      { icon: "📍", label: "Location", value: "JALALPUR FUUN, opp. Gangaajal City, near Loknayak Jayaprakash Narayan Bridge, Sonepur, Sahapur Diara, Bihar 841101", url: "https://maps.app.goo.gl/R7KrFHJbtXndraK96" },
-      { icon: "📞", label: "Phone", value: "+91 93344 77891" },
+      { icon: "📍", label: "Location One", value: "JALALPUR FUUN, opp. Gangaajal City, near Loknayak Jayaprakash Narayan Bridge, Sonepur, Sahapur Diara, Bihar 841101", url: "https://maps.app.goo.gl/R7KrFHJbtXndraK96" },
+       { icon: "📍", label: "Location Two", value: "2nd Branch: Ghirne Amusement Park, Danapur Naubatpur Rd, Faridpur, Patna, Bihar 801113", url: "https://maps.app.goo.gl/F7SESpEfb33ZXzts6" },
+      { icon: "📞", label: "Phone", value: "+91 9296877891" },
       { icon: "✉️", label: "Email", value: "info@yogistuntschool.com" },
       { icon: "🕐", label: "Schedule", value: "1 hr/day, 5 days/week + 1 rest day + 1 maintenance day" },
     ],
@@ -152,6 +151,7 @@ export const siteContent = {
       email: "Email Address",
       phone: "Phone Number",
       program: "Interested Program",
+      addOn: "Add-On",
       message: "Your Message",
       consent: "I agree to receive communication from Yogi Stunt School on above provided details.",
       submit: "Send Enquiry",
@@ -162,8 +162,8 @@ export const siteContent = {
   footer: {
     tagline: "Train Hard. Perform Bold. Stay Safe.",
     copyright: `© ${new Date().getFullYear()} Yogi Stunt School. All rights reserved.`,
-    quickLinks: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact", "Privacy Policy", "Terms and Condition"],
-    links: ["Privacy Policy", "Terms and Condition"],
+    quickLinks: ["Home", "About", "Programs", "Gallery", "Testimonials", "Contact", "Privacy Policy", "Terms and Condition", "FAQ"],
+    links: ["Privacy Policy", "Terms and Condition", "FAQ"],
     businessDetails: [
       { label: "GST No.", value: "10AALCT0135D1Z1" },
       { label: "CIN No.", value: "U85211BR2024PTC069503" },

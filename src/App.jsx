@@ -30,13 +30,19 @@ const [path, setPath] = useState(getInitialPath())
 
   const isPrivacyPage = path === '/privacy'
   const isTermsPage = path === '/termandcondition'
-  const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : null
+  const isFaqPage = path === '/faq'
+  const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : isFaqPage ? 'faq' : null
 
   const openLegalModal = (type) => setLegalModalType(type)
   const closeLegalModal = () => setLegalModalType(null)
 
   const openLegalPage = (type) => {
-    const nextPath = type === 'privacy' ? '/privacy' : '/termandcondition'
+    const pagePathByType = {
+      privacy: '/privacy',
+      terms: '/termandcondition',
+      faq: '/faq',
+    }
+    const nextPath = pagePathByType[type] || '/'
     window.history.pushState({}, '', nextPath)
     setLegalModalType(null)
     setPath(nextPath)

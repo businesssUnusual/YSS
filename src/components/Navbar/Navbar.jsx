@@ -25,6 +25,11 @@ export default function Navbar() {
       setMenuOpen(false)
       return
     }
+    if (id === 'FAQ') {
+      window.open('/faq', '_blank')
+      setMenuOpen(false)
+      return
+    }
     const el = document.getElementById(id.toLowerCase())
     if (el) el.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)

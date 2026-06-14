@@ -8,14 +8,36 @@ const { formLabels } = contact
 const contactPhone = contact.info.find(item => item.label === 'Phone')?.value || ''
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', program: '', message: '', consent: false })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    program: '',
+    addOns: [],
+    message: '',
+    consent: false,
+  })
   const [submitted, setSubmitted] = useState(false)
+
+  const programOptions = ['1-Month Master', '2-Month Pro Rider', '3-Month Elite']
+  const addOnOptions = ['Bike + Petrol + Maintenance', 'Stay + Food', 'Safety Gear']
 
   const handleChange = e => {
     const { name, value, type, checked } = e.target
     setForm({
       ...form,
       [name]: type === 'checkbox' ? checked : value,
+    })
+  }
+
+  const handleAddOnChange = e => {
+    const { value, checked } = e.target
+    setForm(prev => {
+      const nextAddOns = checked
+        ? [...prev.addOns, value]
+        : prev.addOns.filter(item => item !== value)
+
+      return { ...prev, addOns: nextAddOns }
     })
   }
 
@@ -26,7 +48,7 @@ export default function Contact() {
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 5000)
-    setForm({ name: '', email: '', phone: '', program: '', message: '', consent: false })
+    setForm({ name: '', email: '', phone: '', program: '', addOns: [], message: '', consent: false })
   }
 
   return (
@@ -98,13 +120,27 @@ export default function Contact() {
                   <label htmlFor="program">{formLabels.program}</label>
                   <select id="program" name="program" value={form.program} onChange={handleChange}>
                     <option value="">Select a program</option>
-                    <option>1-Month Master</option>
-                    <option>2-Month Pro Rider</option>
-                    <option>3-Month Elite</option>
-                    <option>Bike + Petrol + Maintenance Add-on</option>
-                    <option>Stay + Food Add-on</option>
-                    <option>General Enquiry</option>
+                    {programOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
                   </select>
+                </div>
+              </div>
+              <div className="form-group">
+                <label>{formLabels.addOn}</label>
+                <div className="contact__addons">
+                  {addOnOptions.map(option => (
+                    <label className="contact__checkbox contact__checkbox--addon" key={option}>
+                      <input
+                        type="checkbox"
+                        name="addOns"
+                        value={option}
+                        checked={form.addOns.includes(option)}
+                        onChange={handleAddOnChange}
+                      />
+                      <span>{option}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
               <div className="form-group">

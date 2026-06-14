@@ -5,10 +5,7 @@
 }
 
 .about__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+  max-width: 900px;
 }
 
 /* ── MEDIA ────────────────────────────────────────────── */
@@ -157,6 +154,5 @@
 }
 
 @media (max-width: 900px) {
-  .about__inner { grid-template-columns: 1fr; gap: 48px; }
-  .about__media { max-width: 480px; margin: 0 auto; }
+  .about__inner { max-width: 100%; }
 }

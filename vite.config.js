@@ -7,5 +7,8 @@ export default defineConfig({
   server: {
     port: 8001,
     open: true,
+    watch: {
+      ignored: ['**/public/images/*/**'],
+    },
   },
 })

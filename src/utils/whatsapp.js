@@ -9,6 +9,10 @@ export function getWhatsAppUrl(phone, message) {
 }
 
 export function buildWhatsAppLeadMessage(form) {
+  const addOns = Array.isArray(form.addOns) && form.addOns.length > 0
+    ? form.addOns.join(', ')
+    : '-'
+
   return [
     'Hi Yogi Stunt School, I am interested in stunt training.',
     '',
@@ -16,6 +20,7 @@ export function buildWhatsAppLeadMessage(form) {
     `Email: ${form.email || '-'}`,
     `Phone: ${form.phone || '-'}`,
     `Program: ${form.program || 'General Enquiry'}`,
+    `Add-On: ${addOns}`,
     `Message: ${form.message || '-'}`,
   ].join('\n')
 }

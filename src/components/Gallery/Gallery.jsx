@@ -1,25 +1,68 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { siteContent } from '../../content/siteContent'
+import { galleryCategories } from '../../content/galleryData'
 import './Gallery.css'
 
 const { gallery } = siteContent
-const assetPath = (relativePath) => `${import.meta.env.BASE_URL}${relativePath}`
 
-// Add real images to /public/images/ — filenames listed here will be picked up automatically
-const galleryImages = [
-  { src: assetPath('images/gallery-1.png'), alt: 'Wheelie machine control drills' },
-  { src: assetPath('images/gallery-2.png'), alt: 'Zero Circle foundation practice' },
-  { src: assetPath('images/gallery-3.png'), alt: 'Static to rolling stoppie progression' },
-  { src: assetPath('images/gallery-4.png'), alt: 'Leg Drag long wheelie control' },
-  { src: assetPath('images/gallery-5.png'), alt: 'Controlled drifting session on track' },
-  { src: assetPath('images/gallery-6.png'), alt: 'Human Compass balance training' },
-  { src: assetPath('images/gallery-7.png'), alt: 'Circle wheelie coordination practice' },
-  { src: assetPath('images/gallery-8.png'), alt: 'Headstand basics with coach supervision' },
-  { src: assetPath('images/gallery-9.png'), alt: 'Complete stunt flow transition training' },
-]
+const coverImageByCategory = {
+  training: '/images/Student Training Session/image_4.png',
+  shows: '/images/Stunt Shows/image_4.JPG',
+  results: '/images/Student Result/image_9.jpg',
+  events: '/images/Event and Colloboration/image_21.jpg',
+  founder: '/images/Founder Stunts/image_26.png',
+  ptp: '/images/PTP/image_21.JPG',
+}
+
+// Build image src — let the browser encode the URL naturally
+const imgSrc = (rawPath) => {
+  const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
+  return base + encodeURI(rawPath)
+}
 
 export default function Gallery() {
+  // lightbox: { catIdx, imgIdx } | null
   const [lightbox, setLightbox] = useState(null)
+  const [failedImages, setFailedImages] = useState([])
+
+  const markImageFailed = useCallback((rawPath) => {
+    setFailedImages(prev => (prev.includes(rawPath) ? prev : [...prev, rawPath]))
+  }, [])
+
+  const clearImageFailed = useCallback((rawPath) => {
+    setFailedImages(prev => prev.filter(path => path !== rawPath))
+  }, [])
+
+  const openLightbox = (catIdx, imgIdx) => setLightbox({ catIdx, imgIdx })
+  const closeLightbox = () => setLightbox(null)
+
+  const prevImage = useCallback(() => {
+    setLightbox(prev => {
+      const total = galleryCategories[prev.catIdx].images.length
+      return { ...prev, imgIdx: (prev.imgIdx - 1 + total) % total }
+    })
+  }, [])
+
+  const nextImage = useCallback(() => {
+    setLightbox(prev => {
+      const total = galleryCategories[prev.catIdx].images.length
+      return { ...prev, imgIdx: (prev.imgIdx + 1) % total }
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!lightbox) return
+    const handler = (e) => {
+      if (e.key === 'ArrowLeft') prevImage()
+      if (e.key === 'ArrowRight') nextImage()
+      if (e.key === 'Escape') closeLightbox()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [lightbox, prevImage, nextImage])
+
+  const activeCat = lightbox ? galleryCategories[lightbox.catIdx] : null
+  const activeImg = activeCat ? activeCat.images[lightbox.imgIdx] : null
 
   return (
     <section id="gallery" className="gallery">
@@ -30,34 +73,60 @@ export default function Gallery() {
           <p className="section-subheadline" style={{ margin: '12px auto 0' }}>{gallery.subheadline}</p>
         </div>
 
-        <div className="gallery__grid">
-          {galleryImages.map((img, i) => (
-            <div
-              key={i}
-              className={`gallery__item gallery__item--${i % 3 === 0 ? 'wide' : 'normal'}`}
-              onClick={() => setLightbox(img)}
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                onError={e => {
-                  e.target.parentElement.classList.add('gallery__item--placeholder')
-                  e.target.style.display = 'none'
-                }}
-              />
+        <div className="gallery__categories">
+          {galleryCategories.map((cat, catIdx) => {
+            const preferredCover = coverImageByCategory[cat.key]
+            const coverIdx = preferredCover ? cat.images.indexOf(preferredCover) : 0
+            const resolvedCoverIdx = coverIdx >= 0 ? coverIdx : 0
+            const coverPath = cat.images[resolvedCoverIdx]
 
-            </div>
-          ))}
+            return (
+              <div key={cat.key} className="gallery__category">
+                <div className="gallery__category-header">
+                  <span className="gallery__category-icon">{cat.icon}</span>
+                  <h3 className="gallery__category-title">{cat.label}</h3>
+                </div>
+                <div
+                  className={`gallery__preview ${failedImages.includes(coverPath) ? 'gallery__item--placeholder' : ''}`}
+                  onClick={() => openLightbox(catIdx, resolvedCoverIdx)}
+                >
+                  {coverPath && (
+                    <img
+                      src={imgSrc(coverPath)}
+                      alt={`${cat.label} cover`}
+                      loading="lazy"
+                      onError={() => markImageFailed(coverPath)}
+                      onLoad={() => clearImageFailed(coverPath)}
+                      style={{ display: failedImages.includes(coverPath) ? 'none' : 'block' }}
+                    />
+                  )}
+                  <div className="gallery__preview-overlay">
+                    <span className="gallery__preview-meta">{cat.images.length} photos</span>
+                    <span className="gallery__preview-cta">Open Gallery</span>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
 
       {/* LIGHTBOX */}
-      {lightbox && (
-        <div className="lightbox" onClick={() => setLightbox(null)}>
-          <button className="lightbox__close">✕</button>
+      {lightbox && activeCat && activeImg && (
+        <div className="lightbox" onClick={closeLightbox}>
+          <button className="lightbox__close" onClick={closeLightbox} aria-label="Close">✕</button>
+
           <div className="lightbox__content" onClick={e => e.stopPropagation()}>
-            <img src={lightbox.src} alt={lightbox.alt} />
+            <div className="lightbox__meta">
+              <span className="lightbox__cat">{activeCat.icon} {activeCat.label}</span>
+              <span className="lightbox__counter">{lightbox.imgIdx + 1} / {activeCat.images.length}</span>
+            </div>
+
+            <div className="lightbox__stage">
+              <button className="lightbox__nav lightbox__nav--prev" onClick={(e) => { e.stopPropagation(); prevImage() }} aria-label="Previous">‹</button>
+              <img src={imgSrc(activeImg)} alt={`${activeCat.label} – photo ${lightbox.imgIdx + 1}`} />
+              <button className="lightbox__nav lightbox__nav--next" onClick={(e) => { e.stopPropagation(); nextImage() }} aria-label="Next">›</button>
+            </div>
           </div>
         </div>
       )}

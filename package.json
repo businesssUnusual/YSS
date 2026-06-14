@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://businesssUnusual.github.io/YSS",
+  "homepage": "https://www.yogistuntschool.com",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

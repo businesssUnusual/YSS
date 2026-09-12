@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
@@ -8,13 +8,13 @@ import './Legal.css'
 const LEGAL_CONTENT = {
   privacy: {
     title: 'Privacy Policy',
-    lastUpdated: 'May 6, 2026',
+    lastUpdated: 'July 18, 2026',
     sections: [
       {
         heading: 'Information We Collect',
         points: [
           'We may collect your name, email address, phone number, and training interest when you contact us.',
-          'If enquiry forms are enabled later, submitted details are used only for admissions and support communication.',
+          'Our website enquiry form collects these details and opens a WhatsApp conversation with our team so we can respond — the form itself does not store your data on our servers.',
           'We do not intentionally collect sensitive personal data unless required for safety or legal compliance.',
         ],
       },

@@ -1,0 +1,24 @@
+.wa-float {
+  position: fixed;
+  bottom: 92px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.wa-float svg {
+  width: 52px;
+  height: 52px;
+}
+
+.wa-float:hover {
+  transform: translateY(-3px) scale(1.07);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+}

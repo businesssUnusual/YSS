@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import StatsBar from './components/StatsBar/StatsBar'
@@ -10,63 +11,31 @@ import Testimonials from './components/Testimonials/Testimonials'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-import { LegalModal, LegalPage } from './components/Legal/Legal'
+import WhatsAppFloat from './components/WhatsAppFloat/WhatsAppFloat'
+import { LegalPage } from './components/Legal/Legal'
 
-function App() {
-  const [loading, setLoading] = useState(true)
-  const [legalModalType, setLegalModalType] = useState(null)
-  const getInitialPath = () => {
-  const params = new URLSearchParams(window.location.search)
-  const redirect = params.get('redirect')
-
-  if (redirect) {
-    return redirect
-  }
-
-  return window.location.pathname
+function ScrollProgress() {
+  const [pct, setPct] = useState(0)
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement
+      const scrolled = el.scrollTop || document.body.scrollTop
+      const total = el.scrollHeight - el.clientHeight
+      setPct(total > 0 ? (scrolled / total) * 100 : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return <div className="scroll-progress" style={{ width: `${pct}%` }} aria-hidden="true" />
 }
 
-const [path, setPath] = useState(getInitialPath())
-
-  const isPrivacyPage = path === '/privacy'
-  const isTermsPage = path === '/termandcondition'
-  const isFaqPage = path === '/faq'
-  const legalPageType = isPrivacyPage ? 'privacy' : isTermsPage ? 'terms' : isFaqPage ? 'faq' : null
-
-  const openLegalModal = (type) => setLegalModalType(type)
-  const closeLegalModal = () => setLegalModalType(null)
-
-  const openLegalPage = (type) => {
-    const pagePathByType = {
-      privacy: '/privacy',
-      terms: '/termandcondition',
-      faq: '/faq',
-    }
-    const nextPath = pagePathByType[type] || '/'
-    window.history.pushState({}, '', nextPath)
-    setLegalModalType(null)
-    setPath(nextPath)
-  }
-
-  const closeLegalPage = () => {
-    window.history.pushState({}, '', '/')
-    setPath('/')
-  }
+function MainLayout() {
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1800)
+    const timer = setTimeout(() => setLoading(false), 600)
     return () => clearTimeout(timer)
   }, [])
-
-  useEffect(() => {
-    const onPopState = () => setPath(window.location.pathname)
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
-  }, [])
-
-  if (legalPageType) {
-    return <LegalPage type={legalPageType} onBack={closeLegalPage} />
-  }
 
   if (loading) {
     return (
@@ -82,6 +51,7 @@ const [path, setPath] = useState(getInitialPath())
 
   return (
     <div className="app">
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
@@ -94,10 +64,38 @@ const [path, setPath] = useState(getInitialPath())
         <Contact />
       </main>
       <Footer />
+      <WhatsAppFloat />
       <ScrollToTop />
-      <LegalModal type={legalModalType} onClose={closeLegalModal} onOpenPage={openLegalPage} />
     </div>
   )
 }
 
-export default App
+function LegalRoute({ type }) {
+  const navigate = useNavigate()
+  return <LegalPage type={type} onBack={() => navigate('/')} />
+}
+
+function WhatsAppRedirect() {
+  useEffect(() => {
+    window.location.replace('https://wa.me/919296877891?text=Hi%20Yogi%20Stunt%20School%2C%20I%E2%80%99m%20contacting%20you%20through%20your%20website.%20I%E2%80%99d%20like%20to%20know%20more%20about%20stunt%20training')
+  }, [])
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#0a0a0a', color: '#fff', fontFamily: 'sans-serif' }}>
+      Redirecting to WhatsApp…
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="/privacy" element={<LegalRoute type="privacy" />} />
+        <Route path="/termandcondition" element={<LegalRoute type="terms" />} />
+        <Route path="/faq" element={<LegalRoute type="faq" />} />
+        <Route path="/whatsapp" element={<WhatsAppRedirect />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}

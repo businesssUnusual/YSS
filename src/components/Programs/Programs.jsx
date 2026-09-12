@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { siteContent } from '../../content/siteContent'
 import './Programs.css'
 
@@ -42,13 +42,15 @@ export default function Programs() {
                     <li key={i}><span className="check">✦</span> {h}</li>
                   ))}
                 </ul>
-                <button className="btn btn-primary" style={{ marginTop: '20px', width: '100%', justifyContent: 'center' }}
+                <button className="btn btn-primary program-card__enroll-btn"
                   onClick={e => { e.stopPropagation(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }}>
                   Enroll Now
                 </button>
               </div>
 
-              <span className="program-card__toggle">{active === prog.id ? '✕' : '+'}</span>
+              <span className="program-card__toggle">
+                {active === prog.id ? '✕ Collapse' : '+ Details'}
+              </span>
             </div>
           ))}
         </div>

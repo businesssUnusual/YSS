@@ -6,11 +6,34 @@
 .contact__inner {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
-  gap: 72px;
+  gap: 48px;
   align-items: start;
 }
 
 /* ── INFO ──────────────────────────────────────────────── */
+.contact__brand-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 24px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--clr-gold, #c9a84c);
+  background: rgba(201, 168, 76, 0.06);
+  border-radius: 0 6px 6px 0;
+}
+
+.contact__brand-identity strong {
+  font-size: 1.1rem;
+  color: var(--clr-white, #fff);
+  letter-spacing: 0.02em;
+}
+
+.contact__brand-identity span {
+  font-size: 0.85rem;
+  color: var(--clr-gold, #c9a84c);
+  font-style: italic;
+}
+
 .contact__sub {
   color: var(--clr-grey-light);
   margin-top: 12px;
@@ -71,31 +94,28 @@
 }
 
 .contact__detail-link {
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(201,168,76,0.35);
+  text-underline-offset: 3px;
   transition: var(--transition);
 }
 
-.contact__detail-link:hover {
+.contact__detail--link:hover .contact__detail-link {
+  text-decoration-color: var(--clr-gold);
+}
+
+.contact__map-hint {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
   color: var(--clr-gold);
+  opacity: 0.7;
+  transition: opacity 0.2s;
 }
 
-.contact__map-placeholder {
-  background: var(--clr-card);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius);
-  padding: 32px 24px;
-  text-align: center;
-  color: var(--clr-grey);
-  font-family: var(--font-heading);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.contact__map-note {
-  font-size: 0.75rem;
-  margin-top: 8px;
-  opacity: 0.6;
+.contact__detail--link:hover .contact__map-hint {
+  opacity: 1;
 }
 
 /* ── FORM ─────────────────────────────────────────────── */
@@ -129,7 +149,7 @@
   font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--clr-gold);
+  color: var(--clr-grey-light);
 }
 
 .form-group input,
@@ -201,6 +221,15 @@
   background: rgba(255,255,255,0.02);
 }
 
+.form-error {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--clr-red-bright);
+  margin-top: 2px;
+}
+
+.contact__submit-btn { width: 100%; justify-content: center; padding: 16px; }
+
 /* ── SUCCESS ──────────────────────────────────────────── */
 .contact__success {
   display: flex;
@@ -215,7 +244,7 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--clr-gold), var(--clr-gold-dark));
+  background: linear-gradient(135deg, var(--clr-success), #27ae60);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +257,7 @@
   font-family: var(--font-display);
   font-size: 2rem;
   letter-spacing: 3px;
-  color: var(--clr-gold);
+  color: var(--clr-success);
 }
 
 .contact__success p {

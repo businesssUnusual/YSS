@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { siteContent } from '../../content/siteContent'
 import { galleryCategories } from '../../content/galleryData'
 import './Gallery.css'
 
 const { gallery } = siteContent
 
-const coverImageByCategory = {
-  training: '/images/Student Training Session/image_4.png',
-  shows: '/images/Stunt Shows/image_4.JPG',
-  results: '/images/Student Result/image_9.jpg',
-  events: '/images/Event and Colloboration/image_21.jpg',
-  founder: '/images/Founder Stunts/image_26.png',
-  ptp: '/images/PTP/image_21.JPG',
+// Always open categories on their first image (image_1) on load/refresh
+const findCoverIndex = (images) => {
+  const idx = images.findIndex((img) => /\/image_1\.[a-z0-9]+$/i.test(img))
+  return idx >= 0 ? idx : 0
 }
 
 // Build image src — let the browser encode the URL naturally
@@ -70,14 +67,12 @@ export default function Gallery() {
         <div className="gallery__header text-center">
           <span className="section-tag">{gallery.sectionTag}</span>
           <h2 className="section-headline">{gallery.headline}</h2>
-          <p className="section-subheadline" style={{ margin: '12px auto 0' }}>{gallery.subheadline}</p>
+          <p className="section-subheadline">{gallery.subheadline}</p>
         </div>
 
         <div className="gallery__categories">
           {galleryCategories.map((cat, catIdx) => {
-            const preferredCover = coverImageByCategory[cat.key]
-            const coverIdx = preferredCover ? cat.images.indexOf(preferredCover) : 0
-            const resolvedCoverIdx = coverIdx >= 0 ? coverIdx : 0
+            const resolvedCoverIdx = findCoverIndex(cat.images)
             const coverPath = cat.images[resolvedCoverIdx]
 
             return (
@@ -96,7 +91,7 @@ export default function Gallery() {
                       alt={`${cat.label} cover`}
                       loading="lazy"
                       onError={() => markImageFailed(coverPath)}
-                      onLoad={() => clearImageFailed(coverPath)}
+                      onLoad={e => { clearImageFailed(coverPath); e.target.classList.add('img-loaded') }}
                       style={{ display: failedImages.includes(coverPath) ? 'none' : 'block' }}
                     />
                   )}

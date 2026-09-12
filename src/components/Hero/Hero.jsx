@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { siteContent } from '../../content/siteContent'
 import './Hero.css'
 
@@ -7,6 +7,7 @@ const assetPath = (relativePath) => `${import.meta.env.BASE_URL}${relativePath}`
 
 export default function Hero() {
   const videoRef = useRef(null)
+  const sectionRef = useRef(null)
 
   useEffect(() => {
     if (videoRef.current) {
@@ -14,8 +15,19 @@ export default function Hero() {
     }
   }, [])
 
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => el.classList.toggle('hero--visible', entry.isIntersecting),
+      { threshold: 0 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" ref={sectionRef}>
       {/* Background video */}
       <div className="hero__bg">
         <video
@@ -26,6 +38,7 @@ export default function Hero() {
           muted
           loop
           playsInline
+          preload="none"
           poster={assetPath('images/image_5.jpg')}
         />
         <div className="hero__overlay" />

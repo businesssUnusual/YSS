@@ -1,5 +1,5 @@
-import React from 'react'
 import { siteContent } from '../../content/siteContent'
+import { navigateTo } from '../../utils/navigation'
 import './Footer.css'
 
 const { footer, nav } = siteContent
@@ -30,22 +30,7 @@ export default function Footer() {
           <ul>
             {footer.quickLinks.map(link => (
               <li key={link}>
-                <button className="footer__nav-link" onClick={() => {
-                  if (link === 'Privacy Policy') {
-                    window.open('/privacy', '_blank')
-                    return
-                  }
-                  if (link === 'Terms and Condition') {
-                    window.open('/termandcondition', '_blank')
-                    return
-                  }
-                  if (link === 'FAQ') {
-                    window.open('/faq', '_blank')
-                    return
-                  }
-                  const el = document.getElementById(link.toLowerCase())
-                  if (el) el.scrollIntoView({ behavior: 'smooth' })
-                }}>
+                <button className="footer__nav-link" onClick={() => navigateTo(link)}>
                   {link}
                 </button>
               </li>
@@ -84,20 +69,11 @@ export default function Footer() {
 
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
-          <p className="footer__copy">{footer.copyright}</p>
+          <p className="footer__copy">Yogi Stunt School, a brand of Yogi Pvt. Ltd. &nbsp;|&nbsp; {footer.copyright}</p>
           <div className="footer__legal">
-            {footer.links.map(l => {
-              if (l === 'Privacy Policy') {
-                return <button key={l} className="footer__legal-link" onClick={() => window.open('/privacy', '_blank')}>{l}</button>
-              }
-              if (l === 'Terms and Condition') {
-                return <button key={l} className="footer__legal-link" onClick={() => window.open('/termandcondition', '_blank')}>{l}</button>
-              }
-              if (l === 'FAQ') {
-                return <button key={l} className="footer__legal-link" onClick={() => window.open('/faq', '_blank')}>{l}</button>
-              }
-              return <a key={l} href="#" className="footer__legal-link">{l}</a>
-            })}
+            {footer.links.map(l => (
+              <button key={l} className="footer__legal-link" onClick={() => navigateTo(l)}>{l}</button>
+            ))}
           </div>
         </div>
       </div>

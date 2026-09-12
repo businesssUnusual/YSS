@@ -97,7 +97,8 @@
   white-space: nowrap;
 }
 
-.navbar__link:hover {
+.navbar__link:hover,
+.navbar__link--active {
   color: var(--clr-gold);
   background: rgba(201,168,76,0.08);
 }
@@ -117,7 +118,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px 12px;
 }
 
 .navbar__burger span {

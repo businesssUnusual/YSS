@@ -1,4 +1,3 @@
-import React from 'react'
 import { siteContent } from '../../content/siteContent'
 import './About.css'
 
@@ -13,6 +12,11 @@ export default function About() {
         <div className="about__text">
           <span className="section-tag">{about.sectionTag}</span>
           <h2 className="section-headline">{about.headline}</h2>
+
+          <div className="about__brand-identity">
+            <strong>Yogi Stunt School</strong>
+            <span>A brand of Yogi Pvt. Ltd.</span>
+          </div>
 
           <div className="about__paragraphs">
             {about.paragraphs.map((p, i) => (
@@ -32,7 +36,7 @@ export default function About() {
             ))}
           </div>
 
-          <button className="btn btn-primary" style={{ marginTop: '32px' }}
+          <button className="btn btn-primary about__cta"
             onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>
             Join the School
           </button>

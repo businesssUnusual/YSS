@@ -5,7 +5,7 @@
 
 .programs__header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 48px;
 }
 .programs__header .section-subheadline {
   margin: 12px auto 0;
@@ -13,7 +13,7 @@
 
 .programs__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -79,14 +79,14 @@
 }
 
 .program-card__level {
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   color: var(--clr-grey);
   letter-spacing: 1px;
 }
 
 .program-card__title {
   font-family: var(--font-heading);
-  font-size: 1.55rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--clr-white);
   margin-bottom: 10px;
@@ -94,7 +94,7 @@
 }
 
 .program-card__desc {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--clr-grey-light);
   line-height: 1.65;
 }
@@ -104,8 +104,10 @@
   bottom: 20px;
   right: 24px;
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: var(--clr-gold);
   line-height: 1;
 }
@@ -149,6 +151,8 @@
   color: var(--clr-gold);
   font-size: 0.7rem;
 }
+
+.program-card__enroll-btn { margin-top: 20px; width: 100%; justify-content: center; }
 
 @media (max-width: 768px) {
   .programs__grid { grid-template-columns: 1fr; }

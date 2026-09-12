@@ -19,12 +19,19 @@ const SUPPORTED_EXTS = new Set([
   '.JPG', '.JPEG', '.PNG', '.WEBP', '.GIF',
 ])
 
+// Sort by the numeric suffix in "image_<n>.ext" so image_2 comes before image_10
+const byImageNumber = (a, b) => {
+  const numOf = (f) => parseInt(f.match(/_(\d+)\.[^.]+$/)?.[1] ?? '0', 10)
+  return numOf(a) - numOf(b)
+}
+
 const categories = CATEGORIES.map(cat => {
   const folderPath = path.join(imagesDir, cat.folder)
   let images = []
   if (fs.existsSync(folderPath)) {
     images = fs.readdirSync(folderPath)
       .filter(f => SUPPORTED_EXTS.has(path.extname(f)))
+      .sort(byImageNumber)
       .map(f => `/images/${cat.folder}/${f}`)
   }
   return { key: cat.key, label: cat.label, icon: cat.icon, images }

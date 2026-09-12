@@ -1,4 +1,3 @@
-import React from 'react'
 import { siteContent } from '../../content/siteContent'
 import './StatsBar.css'
 
